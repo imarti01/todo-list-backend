@@ -11,15 +11,17 @@ const UserSchema = new Schema({
   },
   password: {
     type: String,
-    required: true,
+    required: false,
   },
   img: {
     type: String,
     required: false,
+    default: "",
   },
-  firebase: {
-    type: String,
+  comesFromFirebase: {
+    type: Boolean,
     required: false,
+    default: false,
   },
   todos: { type: Array, required: true, default: [] },
 });
