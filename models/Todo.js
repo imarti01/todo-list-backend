@@ -1,12 +1,12 @@
 const { Schema, model } = require("mongoose");
 
 const TodoSchema = new Schema({
-  todoId: {
+  text: {
     type: String,
     required: true,
   },
-  text: {
-    type: String,
+  isChecked: {
+    type: Boolean,
     required: true,
   },
 });
