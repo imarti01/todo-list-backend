@@ -8,7 +8,7 @@ const addNewUser = async (req, res) => {
   try {
     const user = await User.findOne({ email: email });
 
-    if (!user) {
+    if (user) {
       return res.status(400).json({
         ok: false,
         msg: "A user already exists with this email",
@@ -35,7 +35,7 @@ const addNewUser = async (req, res) => {
     console.log(error);
     return res.status(503).json({
       ok: false,
-      msn: "Something happened",
+      msg: "Something happened",
     });
   }
 };
@@ -45,7 +45,7 @@ const loginUser = async (req, res) => {
   const { email, password } = userData;
 
   try {
-    const user = await User.findOne({ email: email });
+    const user = await User.findOne({ email: email }).populate("todos");
     if (!user) {
       return res.status(400).json({
         ok: false,
@@ -64,7 +64,6 @@ const loginUser = async (req, res) => {
     }
 
     const { _id, username, img, todos, comesFromFirebase } = user;
-
     return res.status(200).json({
       ok: true,
       user: { userId: _id, username, email, img, comesFromFirebase },
@@ -84,7 +83,7 @@ const authFirebase = async (req, res) => {
   const { email } = userData;
 
   try {
-    const user = await User.findOne({ email: email });
+    const user = await User.findOne({ email: email }).populate("todos");
     if (!user) {
       const newUser = new User({
         username: userData.username,

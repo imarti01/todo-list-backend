@@ -23,7 +23,7 @@ const UserSchema = new Schema({
     required: false,
     default: false,
   },
-  todos: { type: Array, required: true, default: [] },
+  todos: [{ type: Schema.Types.ObjectId, ref: "Todo" }],
 });
 
 module.exports = model("User", UserSchema);
