@@ -4,6 +4,7 @@ const { connectDb } = require("./db/config");
 require("dotenv").config();
 const userRoutes = require("./routes/userRoutes");
 const todosRoutes = require("./routes/todosRoutes");
+const fileUpload = require("express-fileupload");
 
 const app = express();
 
@@ -11,6 +12,13 @@ connectDb();
 
 app.use(cors());
 app.use(express.json());
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "./uploads",
+  })
+);
+
 app.use("/users", userRoutes);
 app.use("/todos", todosRoutes);
 

@@ -14,9 +14,8 @@ const UserSchema = new Schema({
     required: false,
   },
   img: {
-    type: String,
-    required: false,
-    default: "",
+    secure_url: { type: String, required: false },
+    public_id: { type: String, required: false },
   },
   comesFromFirebase: {
     type: Boolean,
